@@ -1,0 +1,33 @@
+
+<div class="sun-tornado type-A" >
+    <div class="left-typeA" > 
+       <h1 *ngIf="isFetching" style="color: whitesmoke; text-align: center;">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <i>Fetching...</i>
+        </h1>
+        <h1 *ngIf="isProduct && !isFetching" style="color: whitesmoke; text-align: center;">Nothing there!!!</h1>
+       <section *ngIf="!isProduct">
+          
+        <ul class="cart__item-list" *ngFor="let productDetail of productDetails" >
+            <li class="cart__item">
+                <h1>{{productDetail.productId.title}}</h1>
+                <h2>Quantity: {{productDetail.quantity}}</h2>
+                <form  method="POST">
+                    <input type="hidden"  name="productId">
+                    <input type="hidden" >
+                    <button mat-raised-button  type="button" (click)="onDelete(productDetail.productId._id)" >Delete</button>
+                </form>
+            </li>
+    </ul>
+    <hr>
+    <div class="centered">
+        <a class="btn" routerLink="/checkout" style="color: black;">
+            <button mat-raised-button>Order Now!</button>
+        </a>
+    </div>
+       </section>
+        
+   
+      
+    </div>
+</div>

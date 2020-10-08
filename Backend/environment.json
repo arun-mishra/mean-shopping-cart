@@ -1,0 +1,8 @@
+{
+    "env":{
+        "USER_ID":"Arun_Mishra",
+        "USER_PASSWORD":"arun3040",
+        "MONGODB_DATABASE":"authAssignment",
+        "SECRET_KEY":"Arun@3040#ighlySecure"
+    }
+}

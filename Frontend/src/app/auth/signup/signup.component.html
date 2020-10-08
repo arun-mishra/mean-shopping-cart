@@ -1,0 +1,45 @@
+<div class="container" class="rainbow-vortex">
+    <div fxLayout="row"fxLayoutAlign="center center" >
+        <div class="container-fluid">
+            <form [formGroup]="signup" class="signup"  (ngSubmit)="onSubmit()" fxLayoutAlign="center center">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <h3><strong>User SignUp:</strong></h3><hr>
+                        <div>
+                            <mat-form-field hint="Do not enter already registered email">
+                                <input type="email" name="email"  formControlName="email" matInput placeholder="Email"> 
+                                <mat-error *ngIf="signup.controls['email'].hasError('required')">This field is required</mat-error>
+                                <br>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field hint="Min. 8 character is required">
+                                <input type="password" name="password"  formControlName="password" matInput placeholder="Password">
+                                <mat-hint align="end"> {{signup.get('password').value?.length}} /8 </mat-hint>
+                                <mat-error *ngIf="signup.controls['password'].hasError('required')">This field is required</mat-error>
+                                <mat-error *ngIf="signup.controls['password'].hasError('minlength')">Password length must be of atleast 8 </mat-error>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div> 
+                            <br>
+                            <button mat-raised-button color="accent" class="buttonload" type="submit" 
+                                    [disabled]="signup.invalid" *ngIf="!onLoadingState">
+                                Sign Up
+                            </button>
+                            <button mat-raised-button color="accent" class="buttonload" type="button"
+                                    *ngIf="onLoadingState">
+                                <i class="fa fa-circle-o-notch fa-spin" *ngIf="onLoadingState"></i>
+                                Signing Up
+                            </button><br><br>
+      
+                            <span>Already have an account: <a routerLink="/auth/login">Login Here</a></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+</div>
+
+  

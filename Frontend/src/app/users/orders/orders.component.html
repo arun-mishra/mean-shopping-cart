@@ -1,0 +1,26 @@
+
+
+<div class="sun-tornado type-A" >
+    <div class="left-typeA"> 
+    
+        <h1 *ngIf="isFetching" style="color: whitesmoke; text-align: center;">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <i>Fetching...</i>
+        </h1>
+        <h1 *ngIf="isOrder && !isFetching" style="color: whitesmoke; text-align: center;">Nothing there!!!</h1>
+     
+            <ul class="orders" *ngFor="let orderDetail of orderDetails"> 
+                    <li class="orders__item">
+                        <h1>Order - #{{orderDetail._id}} - <a (click)="onInvoice(orderDetail._id)"style="color: whitesmoke; cursor: pointer;">Invoice</a></h1>
+                        <ul class="orders__products" *ngFor="let productDetail of orderDetail.products" >
+                            
+                                <li class="orders__products-item">{{productDetail.product.title}} ({{productDetail.quantity}})</li>
+                            
+                        </ul>
+                    </li>
+                
+            </ul>
+ 
+      
+    </div>
+</div>

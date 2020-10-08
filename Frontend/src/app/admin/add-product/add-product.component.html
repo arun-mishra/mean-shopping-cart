@@ -1,0 +1,65 @@
+<div class="sun-tornado type-A" >
+    <div class="left-typeA" > 
+        <form [formGroup]="signup" class="signup"  (ngSubmit)="onSubmit()" fxLayoutAlign="center">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div>
+                        <mat-form-field hint="Do not enter already registered email">
+                            <input type="text" name="title"  formControlName="title" matInput placeholder="Title"> 
+                            <mat-error *ngIf="signup.controls['title'].hasError('required')">This field is required</mat-error>
+                            <br>
+                        </mat-form-field>
+                    </div>
+                    <div>
+ 
+                            <input class="file" type="file" name="image" id="image" multiple="false" (change)="onFileSelect($event)" formControlName="imageUrl" ><br>
+                            <img [src]="imgSrc" >
+                           
+                    </div>
+                    <div>
+                        <mat-form-field hint="Min. 8 character is required">
+                            <input type="number" name="price"  formControlName="price" matInput placeholder="Price">
+                            <mat-error *ngIf="signup.controls['price'].hasError('required')">This field is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field hint="Min. 8 character is required">
+                            <textarea name="description" formControlName="description" matInput placeholder="Description"   cols="30" rows="10" >
+                                
+                            </textarea>
+                            <mat-error *ngIf="signup.controls['description'].hasError('required')">This field is required</mat-error>
+                                <mat-error *ngIf="signup.controls['description'].hasError('minlength')">Description length must be of atleast 8 </mat-error>
+                           
+                        </mat-form-field>
+                    </div>
+                    
+                    <div> 
+                        <br>
+                        <button  mat-raised-button color="accent" class="buttonload" type="submit" 
+                                *ngIf="(!onLoadingState) && (!editMode)"
+                                [disabled]="signup.invalid">
+                            Add Product
+                        </button>
+                         <button mat-raised-button color="accent" class="buttonload" type="submit" 
+                            *ngIf="(!onLoadingState) && (editMode)">
+                            Edit Product
+                        </button>
+
+                        <button mat-raised-button color="accent" class="buttonload" type="button"
+                                *ngIf="onLoadingState && !editMode">
+                            <i class="fa fa-circle-o-notch fa-spin" *ngIf="onLoadingState"></i>
+                           Adding
+                        </button>
+                        <button mat-raised-button color="accent" class="buttonload" type="button"
+                            *ngIf="onLoadingState && editMode">
+                            <i class="fa fa-circle-o-notch fa-spin" *ngIf="onLoadingState"></i>
+                            Editing
+                            </button>
+                        <br><br>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

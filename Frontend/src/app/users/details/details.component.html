@@ -1,0 +1,19 @@
+<div class="sun-tornado type-A" >
+    <div class="left-typeA" >
+        <h1 *ngIf="isFetching" style="color: whitesmoke; text-align: center;">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <i>Fetching...</i>
+        </h1>
+        <main class="centered" *ngIf="isProduct"> 
+            <h1>{{productDetail.title}} </h1>
+            <hr>
+            <div class="image">
+                <img src="../../../assets/images/profile_pic_boys.jpg"  alt="Product Title">
+            </div>
+            <h2>{{productDetail.price}}</h2>
+            <p>{{productDetail.description}}</p>
+            <hr>
+            <button mat-raised-button type="button" *ngIf="!isAdminAuthenticated" (click)="onAddToCart(productDetail._id)">Add to Cart</button>
+        </main>
+    </div>
+</div>

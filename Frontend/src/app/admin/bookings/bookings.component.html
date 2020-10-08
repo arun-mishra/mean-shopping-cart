@@ -1,0 +1,42 @@
+<div class="sun-tornado type-A" >
+    <div class="left-typeA" > 
+        
+        <h1 class="fetching" *ngIf="isFetching" >
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <i>Fetching...</i>
+        </h1>
+        <h1 *ngIf="isOrder && !isFetching" style="color: whitesmoke; text-align: center;">Nothing there!!!</h1>
+          <section *ngIf="!isOrder">
+            <ul class="orders" *ngFor="let bookingsDetail of bookingsDetails">
+             
+                <li class="orders__item">
+                    <h1>Order - # {{bookingsDetail._id._id}} </h1>
+                    <ul class="orders__products">
+                            <li class="orders__products-item">Product - {{bookingsDetail._id.title}}
+                                <br>
+                                Qty. - {{bookingsDetail._id.quantity}}
+                                <br>
+                                User Id - {{bookingsDetail._id.userId}}
+                                <br>
+                                Price - {{bookingsDetail._id.price}}
+                                <br>
+                                Total Amount - {{bookingsDetail._id.Total}}
+                             </li>
+                    </ul>
+                </li>
+           
+        </ul>
+    
+          </section>
+          <section class="pagination" *ngIf="showPagination">
+            <a  class="btn" *ngIf="(currentPage !== 1) && (previousPage !== 1)" [routerLink]="['/admin/bookings',{queryParams:{page:1}}]">1</a>
+            <a class="btn" *ngIf="hasPreviousPage" href="/admin/bookings?page={{previousPage}}">{{previousPage}}</a>
+            <a href="/admin/bookings?page={{currentPage}}" class="active">{{currentPage}}</a>
+            <a class="btn" *ngIf="hasNextPage" href="/admin/bookings?page={{nextPage}}">{{nextPage}}</a>
+        
+            <a class="btn" *ngIf="(lastPage !== currentPage) && (nextPage !== lastPage)" href="/admin/bookings?page={{lastPage}}">{{lastPage}}</a>
+        </section>  
+            
+ 
+    </div>
+</div>

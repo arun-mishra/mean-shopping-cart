@@ -1,0 +1,54 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <a routerLink="/">
+      <img
+      width="50"
+      height="50"
+      alt="Angular Logo"
+      src="../assets/shopping-cart.png"
+    />
+  </a>
+
+  
+
+  <a routerLink="/shop">
+    <button mat-raised-button class="home-button"> Shop</button>
+  </a> 
+  <a routerLink="/cart" *ngIf="isAuthenticated"> 
+    <button mat-raised-button class="home-button"> Cart</button>
+  </a> 
+  <a routerLink="/orders" *ngIf="isAuthenticated">
+    <button mat-raised-button class="home-button"> Orders</button>
+  </a> 
+  <a *ngIf="isAdminAuthenticated" routerLink="/admin/add-product">
+    <button mat-raised-button class="home-button" > Add Product</button>
+  </a> 
+  <a *ngIf="isAdminAuthenticated" routerLink="/admin/products">
+    <button mat-raised-button class="home-button"> Admin Product</button>
+  </a> 
+  <a *ngIf="isAdminAuthenticated" routerLink="/admin/bookings">
+    <button mat-raised-button class="home-button"> Bookings</button>
+  </a> 
+  
+    <div class="spacer"></div>
+    <button mat-raised-button type="button" color="primary" *ngIf="isAuthenticated || isAdminAuthenticated" (click)="onLogout()">Logout</button>
+</div>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<!-- 
+  <mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <app-side-nav (closeSidenav)="sidenav.close()"></app-side-nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+ -->
