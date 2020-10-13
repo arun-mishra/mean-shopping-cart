@@ -1,9 +1,7 @@
-<div class="container" class="rainbow-vortex">
-    <div fxLayout="row"fxLayoutAlign="center center" >
-        <div class="container-fluid">
-            <form [formGroup]="signup" class="signup"  (ngSubmit)="onSubmit()" fxLayoutAlign="center center">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div class="grid">
+        <div class="inner-grid">
+            <form [formGroup]="signup"   (ngSubmit)="onSubmit()" >
+                
                         <h3><strong>User SignUp:</strong></h3><hr>
                         <div>
                             <mat-form-field hint="Do not enter already registered email">
@@ -35,11 +33,9 @@
       
                             <span>Already have an account: <a routerLink="/auth/login">Login Here</a></span>
                         </div>
-                    </div>
-                </div>
+
             </form>
         </div>
-      </div>
 </div>
 
   

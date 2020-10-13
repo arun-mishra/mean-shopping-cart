@@ -14,20 +14,18 @@ export class HomeComponent implements OnInit {
   title = 'Welcome to Online Shopping Market!';
   isAuthenticated:boolean= false;
   isAdminAuthenticated:boolean= false;
-  // isTypeA:string;
-  // isTypeB:string;
-  // isTypeC:string;
-  // name:string;
+
   constructor(private verifyTokenService:VerifyTokenService, private authService:AuthService,private http:HttpClient) { }
 
   ngOnInit(): void {
     
     const adminId = localStorage.getItem('adminId');
+    const userId = localStorage.getItem('userId');
     console.log(adminId)
     if(adminId){
       this.verifyTokenService.verifyAdminToken();
     }
-    else{
+    else if(userId){
       this.verifyTokenService.verifyUserToken();
     }
    
@@ -40,21 +38,6 @@ export class HomeComponent implements OnInit {
     this.authService.isAdminAuthenticated.subscribe(res=>{
       this.isAdminAuthenticated = res
     })
-    // const type = localStorage.getItem('type');
-    // if(type === 'A'){
-    //   this.isTypeA = type;
-    // } else if(type === 'B'){
-    //   this.isTypeB =type
-    // } else if(type==='C'){
-    //   this.isTypeC = type
-    // }
-
-    // if(this.isAuthenticated){
-    //   this.http.get<string>('http://localhost:3000/auth/userName')
-    //   .subscribe(res=>{
-    //      this.name =res
-    //   })
-    // }
-    
+     
   }
 }

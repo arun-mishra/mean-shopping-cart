@@ -10,7 +10,6 @@
   </a>
 
   
-
   <a routerLink="/shop">
     <button mat-raised-button class="home-button"> Shop</button>
   </a> 
@@ -34,8 +33,8 @@
     <button mat-raised-button type="button" color="primary" *ngIf="isAuthenticated || isAdminAuthenticated" (click)="onLogout()">Logout</button>
 </div>
 
-<main>
-  <router-outlet></router-outlet>
+<main class="wrapper">
+    <router-outlet></router-outlet>
 </main>
 
 <!-- 

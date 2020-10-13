@@ -22,6 +22,7 @@ export interface ShopData{
 })
 export class ShopComponent implements OnInit{
     isAdminAuthenticated =false;
+    isAuthenticated = false;
     product_details:ProductDetail[] =[];
     isProducts:boolean = false;
     showPagination:boolean = false;
@@ -43,10 +44,16 @@ export class ShopComponent implements OnInit{
 
     ngOnInit(){
         
-        //this.verifyTokenService.verifyAdminToken();
+        this.verifyTokenService.verifyAdminToken();
         this.authService.isAdminAuthenticated.subscribe(
             res=>{
                 this.isAdminAuthenticated = res
+            }
+        )
+        this.verifyTokenService.verifyUserToken();
+        this.authService.isAuthenticated.subscribe(
+            res=>{
+                this.isAuthenticated = res
             }
         )
         this.route.queryParams.subscribe((params)=>{
@@ -67,6 +74,7 @@ getProduct(){
         this.previousPage = res.previousPage;
         this.product_details = res.products;
         this.showPagination = true;
+        console.log(res)
     })
 }
 addToCart(prodId){

@@ -30,4 +30,6 @@ router.get('/orders', isAuth, shopController.getOrders);
 
 router.get('/orders/:orderId', isAuth, shopController.getInvoice);
 
+router.post('/multi-cart-item',isAuth ,shopController.postMultiCart)
+
 module.exports = router;

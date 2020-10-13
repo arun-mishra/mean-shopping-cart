@@ -47,6 +47,7 @@ router.post(
       .isLength({ min: 3 })
       .trim(),
     body('price').isFloat(),
+    body('image').isString(),
     body('description')
       .isLength({ min: 5, max: 400 })
       .trim()

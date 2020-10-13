@@ -1,43 +1,36 @@
-
-<div class="sun-tornado type-A" >
-    <div class="left-typeA" > 
-         <div class="grid">
-               
-                    <article class="card product-item" *ngFor="let product_detail of product_details">
-                        <header class="card__header">
-                            <h1 class="product__title">{{product_detail.title}} </h1>
-                        </header>
-                        <div class="card__image">
-                            <img src="../../../assets/hill.jpg"
-                                alt="hil">
-                        </div>
-                        <div class="card__content">
-                            <h2 class="product__price">${{product_detail.price}}</h2>
-                            <p class="product__description">{{product_detail.description}} </p>
-                        </div>
-                        <div class="card__actions">
-                            <a >
-                                <button mat-raised-button type="button" [routerLink]="['/details',product_detail._id]" >Details</button>
-                            </a>
-                            <a >
-                                <button mat-raised-button type="button" *ngIf="!isAdminAuthenticated" (click)="addToCart(product_detail._id)">Add to Carts</button>
-                            </a>
-                         
-                        </div>
-                    </article>
-                   
+<div class="grid">
+    <div class="inner-grid">
+        <article class="card product-item" *ngFor="let product_detail of product_details" >
+            <header class="card__header">
+                <h1 class="product__title">{{product_detail.title}} </h1>
+            </header>
+            <div class="card__image">
+                <img src="{{product_detail.imageUrl}}" alt="hil">
             </div>
-            <section class="pagination" *ngIf="showPagination">
-                <a  class="btn" *ngIf="(currentPage !== 1) && (previousPage !== 1)" href="/shop?page=1">1</a>
-                <a class="btn" *ngIf="hasPreviousPage" href="/shop?page={{previousPage}}">{{previousPage}}</a>
-                <a href="/shop?page={{currentPage}}" class="active">{{currentPage}}</a>
-                <a class="btn" *ngIf="hasNextPage" href="/shop?page={{nextPage}}">{{nextPage}}</a>
-            
-                <a class="btn" *ngIf="(lastPage !== currentPage) && (nextPage !== lastPage)" href="/shop?page={{lastPage}}">{{lastPage}}</a>
-           
-        </section>  
-            <h1 *ngIf="isProducts">No Products Found!</h1>
-    
-     
+            <div class="card__content">
+                <h2 class="product__price">${{product_detail.price}}</h2>
+                <p class="product__description">{{product_detail.description}} </p>
+            </div>
+            <div class="card__actions">
+                <a>
+                    <button mat-raised-button type="button" [routerLink]="['/details',product_detail._id]" >Details</button>
+                </a>
+                <a>
+                    <button mat-raised-button type="button" *ngIf="!isAdminAuthenticated && isAuthenticated" (click)="addToCart(product_detail._id)">Add to Carts</button>
+                </a>
+            </div>
+        </article>
     </div>
+        
+    
+                   
 </div>
+<section class="pagination" *ngIf="showPagination">
+    <a  class="btn" *ngIf="(currentPage !== 1) && (previousPage !== 1)" href="/shop?page=1">1</a>
+    <a class="btn" *ngIf="hasPreviousPage" href="/shop?page={{previousPage}}">{{previousPage}}</a>
+    <a href="/shop?page={{currentPage}}" class="active">{{currentPage}}</a>
+    <a class="btn" *ngIf="hasNextPage" href="/shop?page={{nextPage}}">{{nextPage}}</a>        
+    <a class="btn" *ngIf="(lastPage !== currentPage) && (nextPage !== lastPage)" href="/shop?page={{lastPage}}">{{lastPage}}</a>
+</section>  
+<h1 *ngIf="isProducts">No Products Found!</h1>
+    

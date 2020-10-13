@@ -22,7 +22,7 @@ export interface ProductData{
 
 export class AddProductComponent {
 //'../../../assets/images/profile_pic_boys.jpg'
-    signup:FormGroup;
+addProduct:FormGroup;
     onLoadingState=false;
     imgSrc:string;
     // imageUpload:FormGroup;
@@ -37,11 +37,12 @@ export class AddProductComponent {
     ngOnInit() {
 
 
-      this.signup=new FormGroup({
-        'title':new FormControl(null,[Validators.required]),
-        'price':new FormControl(null,[Validators.required,Validators.minLength(8)]),
-        'imageUrl': new FormControl('',Validators.required),
-        'description': new FormControl('',[Validators.required,Validators.minLength(8)])
+      this.addProduct=new FormGroup({
+        'title':new FormControl(null,[Validators.required,Validators.minLength(3)]),
+        'price':new FormControl(null,[Validators.required]),
+        // 'imageUrl' : new FormControl('',Validators.required)
+        'image': new FormControl(null,Validators.required),
+        'description': new FormControl('',[Validators.required,Validators.minLength(5)])
       })
       this.uiService.isSignupLoadingState.subscribe(res=>{
         this.onLoadingState=res;
@@ -54,9 +55,9 @@ export class AddProductComponent {
           this.http.get<{title:string,description:string,price:number}>('http://localhost:8080/admin/getProduct/'+this.productId)
           .subscribe(res=>{
               const prodDetail = res;
-              this.signup.patchValue({"title":prodDetail?.title})
-              this.signup.patchValue({"description":prodDetail?.description})
-              this.signup.patchValue({"price":prodDetail?.price})
+              this.addProduct.patchValue({"title":prodDetail?.title})
+              this.addProduct.patchValue({"description":prodDetail?.description})
+              this.addProduct.patchValue({"price":prodDetail?.price})
              
           })
         }else{
@@ -70,49 +71,51 @@ export class AddProductComponent {
     
     }
 
-    onFileSelect(event){
+  //   onFileSelect(event){
    
-      this.selectedFile=<File>event.target.files[0];
-      if(event.target.files && event.target.files[0]){
-          const reader=new FileReader();
-          reader.onload=(e:any)=>this.imgSrc=e.target.result;
-          reader.readAsDataURL(event.target.files[0]);
-          this.selectedFile=event.target.files[0];
-      }else{
-          this.imgSrc='../../../assets/images/profile_pic_boys.jpg';
-          this.selectedFile=null;
-      }
-      console.log(this.selectedFile)
-  }
+  //     this.selectedFile=<File>event.target.files[0];
+  //     if(event.target.files && event.target.files[0]){
+  //         const reader=new FileReader();
+  //         reader.onload=(e:any)=>this.imgSrc=e.target.result;
+  //         reader.readAsDataURL(event.target.files[0]);
+  //         this.selectedFile=event.target.files[0];
+  //     }else{
+  //         this.imgSrc='../../../assets/images/profile_pic_boys.jpg';
+  //         this.selectedFile=null;
+  //     }
+  //     console.log(this.selectedFile)
+  // }
   
     onSubmit(){
 
 
       this.onLoadingState=true;
-      const title = this.signup.value.title;
-      const price = this.signup.value.price;
-      const description = this.signup.value.description;
-      const imageUrl = this.signup.value;
-      console.log(imageUrl)
+      const title = this.addProduct.value.title;
+      const price = this.addProduct.value.price;
+      const description = this.addProduct.value.description;
+      const image = this.addProduct.value.image;
+     // const imageUrl = this.addProduct.value;
+      //console.log(imageUrl)
       const fd= new FormData();
       fd.append('image',this.selectedFile);
       fd.append('title',title);
       fd.append('price',price);
       fd.append('description',description);
+      fd.append('image',image);
 
-      console.log(this.selectedFile)
+      //console.log(this.selectedFile)
       // const productData:ProductData = {title:title,price:price,description:description,fd:fd}
       console.log(this.editMode)
 
       if(this.editMode){
-        this.http.post('http://localhost:8080/admin/edit-product',{productId:this.productId,title:title,price:price,description:description})
+        this.http.post('http://localhost:8080/admin/edit-product',{productId:this.productId ,title:title,price:price,description:description,image:image})
         .subscribe(res=>{
           this.onLoadingState=false;
           console.log(res);
           this.uiService.showSnackBar('Product Edited Successfully!!!',null,3000);
         })
       }else{
-        this.http.post('http://localhost:8080/admin/add-product',fd)
+        this.http.post('http://localhost:8080/admin/add-product',{title:title,price:price,description:description,image:image})
         .subscribe(res=>{
           console.log(res)
           this.onLoadingState=false;
@@ -125,7 +128,7 @@ export class AddProductComponent {
      
      
      // this.authService.createUser(email,password)
-      this.signup.reset();
+      this.addProduct.reset();
       setTimeout(() => this.formGroupDirective.resetForm(), 0)
          
   }

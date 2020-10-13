@@ -28,11 +28,12 @@ const userSchema = new Schema({
 });
 
 userSchema.methods.addToCart = function(product) {
-  console.log('product =',product)
+  console.log('product ',product)
+
   const cartProductIndex = this.cart.items.findIndex(cp => {
     return cp.productId.toString() === product._id.toString();
   });
-  let newQuantity = 1;
+  let newQuantity = 1
   const updatedCartItems = [...this.cart.items];
 
   if (cartProductIndex >= 0) {

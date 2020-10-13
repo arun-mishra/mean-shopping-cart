@@ -9,6 +9,7 @@ import { UIService } from '../shared/uiService.service';
 export class VerifyTokenService {
 
     token:string;
+    adminEmail:string = "admin@admin.com";
 
     constructor(private http: HttpClient,private authService:AuthService, 
                 private router:Router, private uiService:UIService){}
@@ -22,8 +23,9 @@ export class VerifyTokenService {
               return;
             }
             const userId = localStorage.getItem('userId')
-            if((userId === res.userId) && (res.email !== "admin@admin.com")){
+            if((userId === res.userId) && (res.email !== this.adminEmail)){
               this.authService.isAuthenticated.next(true);
+        
 
             }else {
               this.authService.isAuthenticated.next(false);
@@ -61,23 +63,23 @@ export class VerifyTokenService {
              return;
           }
           const adminId = localStorage.getItem('adminId')
-          if((adminId === res.adminId) && (res.email == "admin@admin.com")){
+          if((adminId === res.adminId) && (res.email == this.adminEmail)){
             this.authService.isAdminAuthenticated.next(true);
             this.authService.isAuthenticated.next(false)
           }else {
             this.authService.isAdminAuthenticated.next(false);
-            this.router.navigate(['/']);
+            //this.router.navigate(['/']);
           }
         },err=>{
           if(err.status===401){
             this.token =null
             this.authService.isAdminAuthenticated.next(false)
-            this.router.navigate(['/']);
+            //this.router.navigate(['/']);
             localStorage.removeItem('token')
             //this.uiService.showSnackBar('Authentication Failed, Try Login Again!!!',null,3000)
           }else{
             this.authService.isAdminAuthenticated.next(false);
-            this.router.navigate(['/']);
+            //this.router.navigate(['/']);
             //this.uiService.showSnackBar(err.error,null,3000)
           }
         })
@@ -86,7 +88,7 @@ export class VerifyTokenService {
         // this.router.navigate(['/fetch-post'])
       }else{
         this.authService.isAdminAuthenticated.next(false)
-        this.router.navigate(['/']);
+        //this.router.navigate(['/']);
       }
   }
 

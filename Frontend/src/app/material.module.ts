@@ -6,7 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select'
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
     imports:[
@@ -17,7 +18,8 @@ import { MatSelectModule } from '@angular/material/select'
         MatInputModule,
         MatSidenavModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        MatChipsModule
     ],
     exports:[
         MatButtonModule,
@@ -27,7 +29,8 @@ import { MatSelectModule } from '@angular/material/select'
         MatInputModule,
         MatSidenavModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        MatChipsModule
     ]
 })
 export class MaterialModule{

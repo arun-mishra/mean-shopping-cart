@@ -1,50 +1,45 @@
-<div class="sun-tornado type-A" >
-    <div class="left-typeA" >
-        <div class="grid">
-            <h1 *ngIf="isFetching" style="color: whitesmoke; text-align: center;">
-                <i class="fa fa-circle-o-notch fa-spin"></i>
-                <i>Fetching...</i>
-            </h1>
-            <h1 *ngIf="isProducts && !isFetching" style="color: whitesmoke; text-align: center;">No Products Found!!!</h1> 
-<article class="card product-item" *ngFor="let product_detail of product_details">
-    <header class="card__header">
-        <h1 class="product__title">
-            {{product_detail.title}}
+<div class="grid" >
+    <div class="inner-grid" >
+        <h1 *ngIf="isFetching" style="color: rgb(0, 0, 0); text-align: center;">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <i>Fetching...</i>
         </h1>
-    </header>
-        <div class="card__image">
-            <img src="../../../assets/images/profile_pic_boys.jpg" alt="test">
-        </div>
-        <div class="card__content">
-            <h2 class="product__price">$
-                {{product_detail.price}}
-            </h2>
-            <p class="product__description">
-                {{product_detail.description}}
-            </p>
-        </div>
-        <div class="card__actions">
-            <a >
-                <button mat-raised-button type="button" [routerLink]="['/admin/edit-product',product_detail._id]">Edit</button>
-            </a>
+        <h1 *ngIf="isProducts && !isFetching" style="color: whitesmoke; text-align: center;">No Products Found!!!</h1> 
+        <article class="card product-item" *ngFor="let product_detail of product_details">
+            <header class="card__header">
+                <h1 class="product__title">
+                    {{product_detail.title}}
+                </h1>
+            </header>
+            <div class="card__image">
+                <img src="{{product_detail.imageUrl}}" alt="test">
+            </div>
+            <div class="card__content">
+                <h2 class="product__price">$
+                    {{product_detail.price}}
+                </h2>
+                <p class="product__description">
+                    {{product_detail.description}}
+                </p>
+            </div>
+            <div class="card__actions">
+                <a >
+                    <button mat-raised-button type="button" [routerLink]="['/admin/edit-product',product_detail._id]">Edit</button>
+                </a>
            
-            <button mat-raised-button type="button" (click)="onDelete(product_detail._id)">Delete</button>
-        </div>
+                <button mat-raised-button type="button" (click)="onDelete(product_detail._id)">Delete</button>
+            </div>
        
   
    
-</article> 
-        </div>
-        <section class="pagination" *ngIf="showPagination">
-            <a  class="btn" *ngIf="(currentPage !== 1) && (previousPage !== 1)" href="/admin/products?page=1">1</a>
-            <a class="btn" *ngIf="hasPreviousPage" href="/admin/products?page={{previousPage}}">{{previousPage}}</a>
-            <a href="/admin/products?page={{currentPage}}" class="active">{{currentPage}}</a>
-            <a class="btn" *ngIf="hasNextPage" href="/admin/products?page={{nextPage}}">{{nextPage}}</a>
-        
-            <a class="btn" *ngIf="(lastPage !== currentPage) && (nextPage !== lastPage)" href="/admin/products?page={{lastPage}}">{{lastPage}}</a>
-       
-    </section>  
-        
-    </div>
-        
+        </article> 
+    </div>  
 </div>
+<section class="pagination" *ngIf="showPagination">
+    <a  class="btn" *ngIf="(currentPage !== 1) && (previousPage !== 1)" href="/admin/products?page=1">1</a>
+    <a class="btn" *ngIf="hasPreviousPage" href="/admin/products?page={{previousPage}}">{{previousPage}}</a>
+    <a href="/admin/products?page={{currentPage}}" class="active">{{currentPage}}</a>
+    <a class="btn" *ngIf="hasNextPage" href="/admin/products?page={{nextPage}}">{{nextPage}}</a>
+    <a class="btn" *ngIf="(lastPage !== currentPage) && (nextPage !== lastPage)" href="/admin/products?page={{lastPage}}">{{lastPage}}</a>     
+</section>  
+        
